@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scalable Real-Time Chat System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Inter;
+}
+
+body{
+background:#f7f9fc;
+color:#222;
+line-height:1.6;
+transition:.3s;
+}
+
+.dark{
+background:#0f172a;
+color:#e2e8f0;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+h1{
+font-size:34px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+margin-bottom:25px;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+}
+
+.dark .card{
+background:#1e293b;
+}
+
+.section-title{
+font-size:24px;
+margin-bottom:12px;
+}
+
+.tech span{
+background:#2563eb;
+color:white;
+padding:6px 12px;
+border-radius:20px;
+margin:4px;
+display:inline-block;
+font-size:14px;
+}
+
+.tags span{
+background:#16a34a;
+color:white;
+padding:6px 12px;
+border-radius:20px;
+margin:4px;
+display:inline-block;
+}
+
+button{
+padding:10px 16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+.toggle{
+background:#111;
+color:white;
+}
+
+.arch{
+background:#eef2ff;
+padding:20px;
+border-radius:10px;
+font-family:monospace;
+white-space:pre-line;
+}
+
+.dark .arch{
+background:#020617;
+}
+
+.video{
+position:relative;
+padding-bottom:56.25%;
+height:0;
+}
+
+.video iframe{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:10px;
+}
+
+details{
+margin-top:10px;
+}
+
+summary{
+font-weight:600;
+cursor:pointer;
+}
+
+ul{
+margin-left:18px;
+}
+
+footer{
+text-align:center;
+margin-top:40px;
+opacity:.6;
+}
+
+a{
+color:#2563eb;
+text-decoration:none;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<h1>💬 Scalable Real-Time Chat Application</h1>
+
+<button class="toggle" onclick="toggleMode()">Dark Mode</button>
+
+</header>
+
+
+<div class="card">
+
+<h2 class="section-title">📌 Project Overview</h2>
+
+<p>
+
+A distributed real-time messaging platform capable of handling 
+<strong>5M+ concurrent users</strong> and <strong>120K messages/sec</strong>.
+The system ensures <strong>sub-100ms delivery latency</strong> using persistent
+WebSocket connections and an event-driven architecture.
+
+The system supports real-time messaging, offline delivery,
+read receipts, typing indicators, and horizontal scaling
+across multiple server clusters.
+
+The architecture follows design principles used in large-scale
+messaging platforms such as WhatsApp, Slack, and Discord.
+
+</p>
+
+<br>
+
+<a href="https://github.com/yourname/realtime-chat-system" target="_blank">GitHub Repository</a> |
+<a href="https://chat-demo.yourdomain.com" target="_blank">Live Demo</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card">
+
+<h2 class="section-title">🧰 Tech Stack</h2>
+
+<p><strong>Languages:</strong> JavaScript, TypeScript</p>
+<p><strong>Frontend:</strong> React, WebSockets, Socket.io</p>
+<p><strong>Backend:</strong> Node.js, Kafka, Redis, MongoDB</p>
+<p><strong>DevOps:</strong> Docker, Kubernetes, CI/CD</p>
+<p><strong>Cloud:</strong> AWS (EC2, ALB, S3), Cloudflare</p>
+
+</div>
+
+<div class="tech">
+
+<span>React 18</span>
+<span>Node.js 20</span>
+<span>WebSocket</span>
+<span>Socket.io</span>
+<span>Redis 7</span>
+<span>Apache Kafka</span>
+<span>MongoDB Atlas</span>
+<span>Docker</span>
+<span>Kubernetes</span>
+<span>AWS EC2</span>
+<span>AWS ALB</span>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🚨 Problem Solved</h2>
+
+<p>
+
+Polling-based chat systems introduce significant latency and
+unnecessary server load.
+
+This system replaces HTTP polling with persistent WebSocket
+connections enabling real-time communication while reducing
+server overhead by approximately <strong>70%</strong>.
+
+The architecture is designed to support millions of concurrent
+connections while ensuring reliable message delivery and
+fault tolerance.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🏗 High Level Architecture</h2>
+
+<div class="arch">
+
+Users
+ ↓
+Global CDN (Cloudflare)
+ ↓
+AWS Application Load Balancer
+ ↓
+WebSocket Gateway Cluster
+ ↓
+Authentication Service
+ ↓
+Kafka Message Broker
+ ↓
+Chat Service Cluster
+ ↓
+Redis Cluster (Presence + Cache)
+ ↓
+MongoDB Sharded Cluster
+ ↓
+Object Storage (Attachments)
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🔄 Message Flow</h2>
+
+<div class="arch">
+
+1. User A sends message via WebSocket
+2. Gateway server validates JWT token
+3. Message pushed to Kafka topic
+4. Chat service consumes message event
+5. Message stored in MongoDB
+6. Redis checks recipient online status
+7. If online → delivered instantly
+8. If offline → stored for later delivery
+9. Push notification triggered
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🗄 Database Schema</h2>
+
+<div class="arch">
+
+Users Collection
+- userId (indexed)
+- username
+- email
+- profileImage
+- lastSeen
+- createdAt
+
+Messages Collection
+- messageId
+- senderId (indexed)
+- receiverId (indexed)
+- roomId
+- message
+- attachments
+- timestamp (indexed)
+- status
+
+ChatRooms Collection
+- roomId
+- participants
+- lastMessage
+- updatedAt
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">⚙ Low Level Design</h2>
+
+<details open>
+<summary>Authentication Service</summary>
+
+JWT-based login system ensuring secure API access.
+
+</details>
+
+<details>
+<summary>Chat Service</summary>
+
+Handles message creation, delivery, persistence, and retries.
+
+</details>
+
+<details>
+<summary>Presence Service</summary>
+
+Tracks online/offline users using Redis and WebSocket heartbeats.
+
+</details>
+
+<details>
+<summary>Media Service</summary>
+
+Handles file uploads and stores them in AWS S3.
+
+</details>
+
+<details>
+<summary>Rate Limiter</summary>
+
+Prevents spam by limiting users to 20 messages/sec using Redis token buckets.
+
+</details>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">📊 Performance Metrics</h2>
+
+<ul>
+
+<li>Concurrent Users Supported: 5,000,000+</li>
+<li>Message Throughput: 120,000 messages/sec</li>
+<li>Average Delivery Latency: 65ms</li>
+<li>Kafka Partitions: 48</li>
+<li>WebSocket Servers: 150 nodes</li>
+<li>Redis Cluster Nodes: 12</li>
+<li>MongoDB Shards: 8</li>
+<li>Target Uptime: 99.99%</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">📈 Scaling Strategy</h2>
+
+<ul>
+
+<li>Horizontal scaling of WebSocket servers</li>
+<li>Redis Pub/Sub for cross-server message delivery</li>
+<li>Kafka partitions for high throughput streaming</li>
+<li>Sticky sessions for WebSocket load balancing</li>
+<li>Auto scaling using Kubernetes HPA</li>
+<li>Multi-region failover deployment</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">✨ Advanced Features</h2>
+
+<ul>
+
+<li>Typing indicators</li>
+<li>Message reactions</li>
+<li>Read receipts</li>
+<li>Message editing & deletion</li>
+<li>Group chats (1000+ users)</li>
+<li>Media attachments</li>
+<li>End-to-end encryption support</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🏷 Tags</h2>
+
+<div class="tags">
+
+<span>SystemDesign</span>
+<span>Realtime</span>
+<span>WebSockets</span>
+<span>DistributedSystems</span>
+<span>BackendEngineering</span>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="section-title">🎥 Project Walkthrough</h2>
+
+<div class="video">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<p>Engineering System Design Portfolio</p>
+
+</footer>
+
+</div>
+
+
+<script>
+
+function toggleMode(){
+document.body.classList.toggle("dark")
+}
+
+</script>
+
+</body>
+
+</html>

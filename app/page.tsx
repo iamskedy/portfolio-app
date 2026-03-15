@@ -3,7 +3,14 @@ export default function Home() {
     <iframe
       title="Static Portfolio"
       src="/index.html"
-      style={{ width: "100vw", height: "100vh", border: "none", margin: 0, padding: 0 }}
+      style={{ 
+        width: "100%", 
+        height: "100vh", 
+        border: "none", 
+        margin: 0, 
+        padding: 0,
+        display: "block" 
+      }}
     />
   );
 }
